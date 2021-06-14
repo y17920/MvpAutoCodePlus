@@ -5,7 +5,12 @@ package com.longforus.mvpautocodeplus
  * Description : 常量
  */
 
+fun getAcLayoutFileName(name: String) = "activity${name.toString().toLowerCase()}_layout"
+fun getFaLayoutFileName(name: String) = "fragment${name.toString().toLowerCase()}_layout"
+fun getBingFileName() = "LayoutBinding"
 fun getContractName(name: String) = "I${name}Contract"
+
+fun getViewModelName(name: String) = "${name}ViewModel"
 
 fun getViewInfName(name: String) = "I${name}View"
 fun getPresenterInfName(name: String) = "I${name}Presenter"
@@ -23,9 +28,9 @@ const val PRESENTER = "presenter"
 const val MODEL = "model"
 
 
-const val SUPER_VIEW = "super_view"
-const val SUPER_PRESENTER = "super_presenter"
-const val SUPER_MODEL = "super_model"
+//const val SUPER_VIEW = "super_view"
+//const val SUPER_PRESENTER = "super_presenter"
+//const val SUPER_MODEL = "super_model"
 const val SUPER_VIEW_ACTIVITY = "super_view_activity"
 const val SUPER_VIEW_FRAGMENT = "super_view_fragment"
 const val SUPER_PRESENTER_IMPL = "super_presenter_impl"

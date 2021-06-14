@@ -37,10 +37,10 @@ class ConfigComponent : SearchableConfigurable {
     private val classChooserFactory by lazy { TreeClassChooserFactory.getInstance(mProject) }
 
     override fun isModified(): Boolean {
-        return mCp.tv_v_name.text != state.getValue(SUPER_VIEW) ||
+/*        return mCp.tv_v_name.text != state.getValue(SUPER_VIEW) ||
             mCp.tv_p_name.text != state.getValue(SUPER_PRESENTER) ||
-            mCp.tv_m_name.text != state.getValue(SUPER_MODEL) ||
-            mCp.tv_model_impl.text != state.getValue(SUPER_MODEL_IMPL) ||
+            mCp.tv_m_name.text != state.getValue(SUPER_MODEL) ||*/
+                return    mCp.tv_model_impl.text != state.getValue(SUPER_MODEL_IMPL) ||
             mCp.tv_presenter_impl.text != state.getValue(SUPER_PRESENTER_IMPL) ||
             mCp.tv_view_fragment.text != state.getValue(SUPER_VIEW_FRAGMENT) ||
             mCp.tv_view_activity.text != state.getValue(SUPER_VIEW_ACTIVITY) ||
@@ -48,13 +48,13 @@ class ConfigComponent : SearchableConfigurable {
     }
 
     override fun getDisplayName(): String {
-        return "MvpAutoCodePlus"
+        return "MvpAutoCodePlus2"
     }
 
     override fun apply() {
-        state.setValue(SUPER_VIEW, mCp.tv_v_name.text)
-        state.setValue(SUPER_PRESENTER, mCp.tv_p_name.text)
-        state.setValue(SUPER_MODEL, mCp.tv_m_name.text)
+//        state.setValue(SUPER_VIEW, mCp.tv_v_name.text)
+//        state.setValue(SUPER_PRESENTER, mCp.tv_p_name.text)
+//        state.setValue(SUPER_MODEL, mCp.tv_m_name.text)
         state.setValue(SUPER_VIEW_ACTIVITY, mCp.tv_view_activity.text)
         state.setValue(SUPER_VIEW_FRAGMENT, mCp.tv_view_fragment.text)
         state.setValue(SUPER_PRESENTER_IMPL, mCp.tv_presenter_impl.text)
@@ -89,12 +89,12 @@ class ConfigComponent : SearchableConfigurable {
     }
 
     private fun loadValues() {
-        mCp.tv_v_name.text = state.getValue(SUPER_VIEW)
+/*        mCp.tv_v_name.text = state.getValue(SUPER_VIEW)
         setClassChooser(mCp.btn_view_select, "Select Super View Interface", mCp.tv_v_name)
         mCp.tv_p_name.text = state.getValue(SUPER_PRESENTER)
         setClassChooser(mCp.btn_p_select, "Select Super Presenter Interface", mCp.tv_p_name)
         mCp.tv_m_name.text = state.getValue(SUPER_MODEL)
-        setClassChooser(mCp.btn_m_select, "Select Super Model Interface", mCp.tv_m_name)
+        setClassChooser(mCp.btn_m_select, "Select Super Model Interface", mCp.tv_m_name)*/
         mCp.tv_view_activity.text = state.getValue(SUPER_VIEW_ACTIVITY)
         setClassChooser(mCp.btn_view_a_select, "Select View extends super Activity", mCp.tv_view_activity, true)
         mCp.tv_view_fragment.text = state.getValue(SUPER_VIEW_FRAGMENT)

@@ -35,12 +35,12 @@ object TemplateMaker {
         }
 
         when (templateName) {
-            CONTRACT_TP_NAME_JAVA -> createContractTemplate(templateName, "java", TemplateCons.CONTRACT_TP_CONTENT_JAVA)
-            CONTRACT_TP_NAME_KOTLIN -> createContractTemplate(templateName, "kt", TemplateCons.CONTRACT_TP_CONTENT_KOTLIN)
-            CONTRACT_TP_NO_MODEL_NAME_JAVA -> createContractTemplate(templateName, "java", TemplateCons.CONTRACT_TP_CONTENT_NO_MODEL_JAVA)
-            CONTRACT_TP_NO_MODEL_NAME_KOTLIN -> createContractTemplate(templateName, "kt", TemplateCons.CONTRACT_TP_CONTENT_NO_MODEL_KOTLIN)
-            VIEW_IMPL_TP_ACTIVITY_JAVA -> createContractTemplate(templateName, "java", TemplateCons.COMMON_IMPL_TP_CONTENT_JAVA)
-            VIEW_IMPL_TP_FRAGMENT_JAVA -> createContractTemplate(templateName, "java", TemplateCons.COMMON_IMPL_TP_CONTENT_JAVA)
+//            CONTRACT_TP_NAME_JAVA -> createContractTemplate(templateName, "java", TemplateCons.CONTRACT_TP_CONTENT_JAVA)
+//            CONTRACT_TP_NAME_KOTLIN -> createContractTemplate(templateName, "kt", TemplateCons.CONTRACT_TP_CONTENT_KOTLIN)
+//            CONTRACT_TP_NO_MODEL_NAME_JAVA -> createContractTemplate(templateName, "java", TemplateCons.CONTRACT_TP_CONTENT_NO_MODEL_JAVA)
+//            CONTRACT_TP_NO_MODEL_NAME_KOTLIN -> createContractTemplate(templateName, "kt", TemplateCons.CONTRACT_TP_CONTENT_NO_MODEL_KOTLIN)
+            VIEW_IMPL_TP_ACTIVITY_JAVA -> createContractTemplate(templateName, "java", TemplateCons.COMMON_IMPL_TP_CONTENT_JAVA_AC)
+            VIEW_IMPL_TP_FRAGMENT_JAVA -> createContractTemplate(templateName, "java", TemplateCons.COMMON_IMPL_TP_CONTENT_JAVA_AC)
             PRESENTER_IMPL_TP_JAVA -> createContractTemplate(templateName, "java", TemplateCons.COMMON_IMPL_TP_CONTENT_JAVA)
             MODEL_IMPL_TP_JAVA -> createContractTemplate(templateName, "java", TemplateCons.COMMON_IMPL_TP_CONTENT_JAVA)
             VIEW_IMPL_TP_ACTIVITY_KOTLIN -> createContractTemplate(templateName, "kt", TemplateCons.COMMON_IMPL_TP_CONTENT_KOTLIN)

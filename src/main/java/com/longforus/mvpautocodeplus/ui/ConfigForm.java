@@ -24,19 +24,16 @@ import javax.swing.JTextField;
 public class ConfigForm {
 
     public JPanel mPanel;
-    public JTextField tv_v_name;
-    public JTextField tv_p_name;
-    public JTextField tv_m_name;
+//    public JTextField tv_v_name;
+//    public JTextField tv_p_name;
+//    public JTextField tv_m_name;
     public JTextField tv_model_impl;
     public JTextField tv_presenter_impl;
     public JTextField tv_view_activity;
     public JTextField tv_view_fragment;
-    public JButton btn_view_select;
     public JButton btn_view_a_select;
     public JButton btn_view_f_select;
-    public JButton btn_p_select;
     public JButton btn_pi_select;
-    public JButton btn_m_select;
     public JButton btn_mi_select;
     public JTextField et_comment_author;
     public LinkLabel lk_look_detail;
@@ -76,7 +73,7 @@ public class ConfigForm {
         final Spacer spacer2 = new Spacer();
         mPanel.add(spacer2,
             new GridConstraints(11, 1, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final JLabel label2 = new JLabel();
+/*//        final JLabel label2 = new JLabel();
         label2.setMinimumSize(new Dimension(-1, -1));
         label2.setText("Super IView Name:  ");
         label2.setToolTipText("");
@@ -91,7 +88,7 @@ public class ConfigForm {
         btn_view_select = new JButton();
         btn_view_select.setText("...");
         mPanel.add(btn_view_select, new GridConstraints(3, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));*/
         final JLabel label3 = new JLabel();
         label3.setText("Base View Activity:");
         label3.setToolTipText("");
@@ -122,7 +119,7 @@ public class ConfigForm {
         btn_view_f_select.setText("...");
         mPanel.add(btn_view_f_select, new GridConstraints(5, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
             GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label5 = new JLabel();
+/*//        final JLabel label5 = new JLabel();
         label5.setText("Super IPresenter Name:  ");
         label5.setToolTipText("");
         mPanel.add(label5,
@@ -136,7 +133,7 @@ public class ConfigForm {
         btn_p_select = new JButton();
         btn_p_select.setText("...");
         mPanel.add(btn_p_select, new GridConstraints(6, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));*/
         final JLabel label6 = new JLabel();
         label6.setText("Base Presenter Impl:");
         label6.setToolTipText("");
@@ -153,7 +150,7 @@ public class ConfigForm {
         btn_pi_select.setText("...");
         mPanel.add(btn_pi_select, new GridConstraints(7, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
             GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label7 = new JLabel();
+/*//        final JLabel label7 = new JLabel();
         label7.setText("Super IModel Name:   ");
         label7.setToolTipText("");
         mPanel.add(label7,
@@ -167,7 +164,7 @@ public class ConfigForm {
         btn_m_select = new JButton();
         btn_m_select.setText("...");
         mPanel.add(btn_m_select, new GridConstraints(8, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
-            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));*/
         final JLabel label8 = new JLabel();
         label8.setText("Base Model Impl:");
         label8.setToolTipText("");

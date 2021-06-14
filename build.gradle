@@ -84,15 +84,15 @@ dependencies {
     //    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-patchPluginXml {
-    changeNotes """<h3>Adapter Android studio 4.1,fix create layout file error.</h3>
-<br/>
-<a href="https://github.com/longforus/MvpAutoCodePlus/blob/master/CHANGELOG.md"><b>Full Changelog History</b></a>"""
-}
-
-publishPlugin {
-    token publishToken
-}
+//patchPluginXml {
+//    changeNotes """<h3>Adapter Android studio 4.1,fix create layout file error.</h3>
+//<br/>
+//<a href="https://github.com/longforus/MvpAutoCodePlus/blob/master/CHANGELOG.md"><b>Full Changelog History</b></a>"""
+//}
+//
+//publishPlugin {
+//    token publishToken
+//}
 
 //指定编译的编码
 tasks.withType(JavaCompile) {

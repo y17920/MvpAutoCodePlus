@@ -16,6 +16,8 @@ import com.intellij.psi.codeStyle.CodeStyleManager
 import com.intellij.psi.codeStyle.JavaCodeStyleManager
 import com.intellij.psi.xml.XmlFile
 import com.longforus.mvpautocodeplus.config.ItemConfigBean
+import com.longforus.mvpautocodeplus.getAcLayoutFileName
+import com.longforus.mvpautocodeplus.getFaLayoutFileName
 import org.jetbrains.android.dom.manifest.Manifest
 import org.jetbrains.android.facet.AndroidFacet
 import org.jetbrains.android.facet.AndroidRootUtil
@@ -72,7 +74,8 @@ fun createLayoutFileForActivityOrFragment(ic: ItemConfigBean,facet: AndroidFacet
                      nameSb.append(it)
                  }
 
-            val layoutFileOriginName = if (isActivity) "activity${nameSb.toString().toLowerCase()}" else "frag${nameSb.toString().toLowerCase()}"
+//            val layoutFileOriginName = if (isActivity) "activity${nameSb.toString().toLowerCase()}" else "fragment${nameSb.toString().toLowerCase()}"
+            val layoutFileOriginName = if (isActivity) getAcLayoutFileName(nameSb.toString()) else getFaLayoutFileName(nameSb.toString())
 
             val rootLayoutName = if (facet.module.dependsOnAndroidx()) "androidx.constraintlayout.widget.ConstraintLayout" else "android.support.constraint.ConstraintLayout"
 

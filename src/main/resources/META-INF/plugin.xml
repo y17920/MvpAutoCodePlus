@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <idea-plugin>
-  <id>com.longforus.mvpautocodeplus</id>
-  <name>MvpAutoCodePlus</name>
+  <id>com.longforus.mvvmautocodeplus</id>
+  <name>MvvmAutoCodePlus</name>
   <vendor email="yxq.longforus@gmail.com" url="https://github.com/longforus">longforus</vendor>
 
   <description><![CDATA[
-    <h1>MvpAutoCodePlus</h1>
+    <h1>MvvmAutoCodePlus</h1>
       <br/>
       <p>
       <b>
@@ -58,9 +58,9 @@
   <actions>
     <!-- Add your actions here -->
 
-    <group description="auto make mvp code" id="mvpMaker" text="Generate MVP Code">
+    <group description="Auto make mvvm code" id="mvpMaker" text="Generate Mvvm Code">
       <add-to-group anchor="first" group-id="NewGroup"/>
-      <action class="com.longforus.mvpautocodeplus.MainAction" description="auto make mvp code" id="mvpMaker.make" text="Generate MVP Code"/>
+      <action class="com.longforus.mvpautocodeplus.MainAction" description="Auto make mvvm code" id="mvpMaker.make" text="Generate Mvvm Code"/>
     </group>
   </actions>
 </idea-plugin>

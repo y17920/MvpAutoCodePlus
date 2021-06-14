@@ -28,16 +28,16 @@ import com.intellij.openapi.application.runWriteAction as runWriteAction1
  * Description :
  */
 
-open class MainAction : AnAction("Generate MVP Code", "auto make mvp code", PlatformIcons.CLASS_ICON), WriteActionAware {
+open class MainAction : AnAction("Generate Mvvm Code", "Auto make Mvvm code", PlatformIcons.CLASS_ICON), WriteActionAware {
     var project: Project? = null
     private lateinit var mSelectedState: PropertiesComponent
-    var curAppPackage:String? = null
+    var curAppPackage: String? = null
 
-    private fun createFile(enterName: String, templateName: String, dir: PsiDirectory, superImplName: String, contract: PsiFile? = null, fileName: String = enterName): Pair<PsiFile?,
-        PsiClass?> {
+    private fun createFile(enterName: String, templateName: String, dir: PsiDirectory, superImplName: String, contract: PsiFile? = null, fileName: String = enterName, it: ItemConfigBean): Pair<PsiFile?,
+            PsiClass?> {
         var clazz: PsiClass? = null
         val template = TemplateMaker.getTemplate(templateName, project!!) ?: return null to null
-        val liveTemplateDefaultValues = TemplateParamFactory.getParam4TemplateName(templateName, enterName, superImplName, contract, mSelectedState).toMutableMap().also {
+        val liveTemplateDefaultValues = TemplateParamFactory.getParam4TemplateName(it,templateName, enterName, superImplName, contract, mSelectedState).toMutableMap().also {
             it["CUR_APP_PACKAGE"] = curAppPackage
         }
         val psiFile = createFileFromTemplate(fileName, template, dir, null, false, liveTemplateDefaultValues, mSelectedState.getValue(COMMENT_AUTHOR))
@@ -103,57 +103,57 @@ open class MainAction : AnAction("Generate MVP Code", "auto make mvp code", Plat
 
     private fun doKtCreate(it: ItemConfigBean, dir: PsiDirectory, facet: AndroidFacet?) {
         val contractK = createFile(it.name, if (it.generateModel) CONTRACT_TP_NAME_KOTLIN else CONTRACT_TP_NO_MODEL_NAME_KOTLIN, getSubDir(dir, CONTRACT), "",
-            fileName = getContractName(it
-                .name))
+                fileName = getContractName(it.name), it = it)
 
         if (it.vImpl.isNotEmpty() && !it.vImpl.startsWith(IS_NOT_SET)) {
             val sdV = getSubDir(dir, VIEW)
             if (it.isActivity) {
-                val activityKt = createFile(it.name, VIEW_IMPL_TP_ACTIVITY_KOTLIN, sdV, it.vImpl, contractK.first, "${it.name}Activity")
-                ComponentRegister.registerActivity(project!!,activityKt.second, JavaDirectoryService.getInstance().getPackage(dir), facet!!, "")
-                doCreateLayoutFile(it,activityKt.second, project!!, facet, false)
+                val activityKt = createFile(it.name, VIEW_IMPL_TP_ACTIVITY_KOTLIN, sdV, it.vImpl, contractK.first, "${it.name}Activity", it)
+                ComponentRegister.registerActivity(project!!, activityKt.second, JavaDirectoryService.getInstance().getPackage(dir), facet!!, "")
+                doCreateLayoutFile(it, activityKt.second, project!!, facet, false)
             } else {
-                val fragmentKt = createFile(it.name, VIEW_IMPL_TP_FRAGMENT_KOTLIN, sdV, it.vImpl, contractK.first, "${it.name}Fragment")
-                doCreateLayoutFile(it,fragmentKt.second, project!!, facet!!, false,false)
+                val fragmentKt = createFile(it.name, VIEW_IMPL_TP_FRAGMENT_KOTLIN, sdV, it.vImpl, contractK.first, "${it.name}Fragment", it)
+                doCreateLayoutFile(it, fragmentKt.second, project!!, facet!!, false, false)
             }
         }
         if (it.pImpl.isNotEmpty()) {
             val sdP = getSubDir(dir, PRESENTER)
-            createFile(it.name, PRESENTER_IMPL_TP_KOTLIN, sdP, it.pImpl, contractK.first, "${it.name}${TemplateParamFactory.getPresenterOrViewModel(it.pImpl)}")
+            createFile(it.name, PRESENTER_IMPL_TP_KOTLIN, sdP, it.pImpl, contractK.first, "${it.name}${TemplateParamFactory.getPresenterOrViewModel(it.pImpl)}", it)
         }
         if (it.mImpl.isNotEmpty() && it.generateModel) {
             val sdM = getSubDir(dir, MODEL)
-            createFile(it.name, MODEL_IMPL_TP_KOTLIN, sdM, it.mImpl, contractK.first, "${it.name}Model")
+            createFile(it.name, MODEL_IMPL_TP_KOTLIN, sdM, it.mImpl, contractK.first, "${it.name}Model",it = it)
         }
     }
 
     private fun doJavaCreate(it: ItemConfigBean, dir: PsiDirectory, facet: AndroidFacet?) {
         val contractJ = createFile(it.name, if (it.generateModel) CONTRACT_TP_NAME_JAVA else CONTRACT_TP_NO_MODEL_NAME_JAVA, getSubDir(dir, CONTRACT),
-            "")
+                "",it = it)
         if (it.vImpl.isNotEmpty() && !it.vImpl.startsWith(IS_NOT_SET)) {
             val sdV = getSubDir(dir, VIEW)
             if (it.isActivity) {
-                val activityJava = createFile(it.name, VIEW_IMPL_TP_ACTIVITY_JAVA, sdV, it.vImpl, contractJ.first)
-                ComponentRegister.registerActivity(project!!,activityJava.second, JavaDirectoryService.getInstance().getPackage(dir), facet!!, "")
-                doCreateLayoutFile(it,activityJava.second, project!!, facet, true)
+                val activityJava = createFile(it.name, VIEW_IMPL_TP_ACTIVITY_JAVA, sdV, it.vImpl, contractJ.first, it = it)
+                ComponentRegister.registerActivity(project!!, activityJava.second, JavaDirectoryService.getInstance().getPackage(dir), facet!!, "")
+                doCreateLayoutFile(it, activityJava.second, project!!, facet, true)
             } else {
-                val fragmentJava = createFile(it.name, VIEW_IMPL_TP_FRAGMENT_JAVA, sdV, it.vImpl, contractJ.first)
-                doCreateLayoutFile(it,fragmentJava.second, project!!, facet!!, true,false)
+                val fragmentJava = createFile(it.name, VIEW_IMPL_TP_FRAGMENT_JAVA, sdV, it.vImpl, contractJ.first, it = it)
+                doCreateLayoutFile(it, fragmentJava.second, project!!, facet!!, true, false)
             }
         }
         if (it.pImpl.isNotEmpty()) {
             val sdP = getSubDir(dir, PRESENTER)
-            createFile(it.name, PRESENTER_IMPL_TP_JAVA, sdP, it.pImpl, contractJ.first)
+            createFile(it.name, PRESENTER_IMPL_TP_JAVA, sdP, it.pImpl, contractJ.first,it = it)
         }
         if (it.mImpl.isNotEmpty() && it.generateModel) {
             val sdM = getSubDir(dir, MODEL)
-            createFile(it.name, MODEL_IMPL_TP_JAVA, sdM, it.mImpl, contractJ.first)
+            createFile(it.name, MODEL_IMPL_TP_JAVA, sdM, it.mImpl, contractJ.first,it = it)
         }
     }
 
 
     private fun getSubDir(dir: PsiDirectory, dirName: String): PsiDirectory {
-        return if (dir.name == CONTRACT) {
+        return dir
+/*        return if (dir.name == CONTRACT) {
             if (dirName == CONTRACT) {
                 dir
             } else {
@@ -161,7 +161,7 @@ open class MainAction : AnAction("Generate MVP Code", "auto make mvp code", Plat
             }
         } else {
             CreateFileAction.findOrCreateSubdirectory(dir, dirName)
-        }
+        }*/
     }
 
 
