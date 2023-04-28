@@ -72,14 +72,14 @@ object TemplateParamFactory {
                     }
                     nameSb.append(it)
                 }
-                liveTemplateParam["LAYOUT"] = getAcLayoutFileName(nameSb.toString())
+                liveTemplateParam["LAYOUT"] = getFaLayoutFileName(nameSb.toString())
             }
             PRESENTER_IMPL_TP_JAVA, PRESENTER_IMPL_TP_KOTLIN -> {
                 setCommonParam(enterName, superImplName, contract, liveTemplateParam, templateName,it)
                 if (templateName == PRESENTER_IMPL_TP_JAVA) {
-                    liveTemplateParam["IMPL_TYPE"] = getPresenterOrViewModel(liveTemplateParam["IMPL"])
+                    liveTemplateParam["IMPL_TYPE"] = "ViewModel"
                 }
-                liveTemplateParam["TYPE"] = getPresenterOrViewModel(liveTemplateParam["IMPL"])
+                liveTemplateParam["TYPE"] = "ViewModel"
                 val nameSb  = StringBuilder()
                 it.name.forEach {
                     if (it >= "A"[0] && it <= "Z"[0]) {

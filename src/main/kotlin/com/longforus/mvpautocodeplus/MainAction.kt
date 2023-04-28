@@ -85,7 +85,7 @@ open class MainAction : AnAction("Generate Mvvm Code", "Auto make Mvvm code", Pl
             val module = ModuleUtil.findModuleForFile(dir.virtualFile, project!!)
             val facet = AndroidFacet.getInstance(module!!)
             if (facet != null) {
-                AndroidRootUtil.getManifestFileForCompiler(facet)?.let {
+                AndroidRootUtil.getPrimaryManifestFile(facet)?.let {
                     AndroidUtils.loadDomElement(facet.module, it, Manifest::class.java)?.let {
                         curAppPackage = it.getPackage()?.value
                     }
@@ -152,16 +152,18 @@ open class MainAction : AnAction("Generate Mvvm Code", "Auto make Mvvm code", Pl
 
 
     private fun getSubDir(dir: PsiDirectory, dirName: String): PsiDirectory {
-        return dir
-/*        return if (dir.name == CONTRACT) {
-            if (dirName == CONTRACT) {
+        if (CONTRACT == dirName) {
+            return   dir
+        }
+        return if (dir.name == CONTRACT) {
+            if (CONTRACT == dirName) {
                 dir
             } else {
                 CreateFileAction.findOrCreateSubdirectory(dir.parentDirectory!!, dirName)
             }
         } else {
             CreateFileAction.findOrCreateSubdirectory(dir, dirName)
-        }*/
+        }
     }
 
 

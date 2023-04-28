@@ -24,7 +24,7 @@ const val NO_SUPER_CLASS = "The implementation class will have no superclass"
 
 const val CONTRACT = "contract"
 const val VIEW = "view"
-const val PRESENTER = "presenter"
+const val PRESENTER = "viewmodel"
 const val MODEL = "model"
 
 

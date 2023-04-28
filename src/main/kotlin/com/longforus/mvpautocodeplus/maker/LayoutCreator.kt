@@ -1,7 +1,6 @@
 package com.longforus.mvpautocodeplus.maker
 
-import com.android.resources.ResourceFolderType
-import com.android.resources.ResourceType
+import com.android.tools.idea.projectsystem.SourceProviders
 import com.android.tools.idea.util.dependsOnAndroidx
 import com.intellij.ide.fileTemplates.FileTemplate
 import com.intellij.ide.fileTemplates.FileTemplateManager
@@ -21,6 +20,8 @@ import com.longforus.mvpautocodeplus.getFaLayoutFileName
 import org.jetbrains.android.dom.manifest.Manifest
 import org.jetbrains.android.facet.AndroidFacet
 import org.jetbrains.android.facet.AndroidRootUtil
+import org.jetbrains.android.facet.ResourceFolderManager
+import org.jetbrains.android.facet.SourceProviderManager
 import org.jetbrains.android.sdk.AndroidPlatform
 import org.jetbrains.android.util.AndroidUtils
 import org.jetbrains.annotations.NotNull
@@ -41,18 +42,18 @@ fun doCreateLayoutFile(ic: ItemConfigBean,element: PsiClass?, project: Project, 
     return if (element == null) {
         null
     } else {
-        val manifestFile = AndroidRootUtil.getManifestFileForCompiler(facet) ?: return null
+        val manifestFile = AndroidRootUtil.getPrimaryManifestFile(facet) ?: return null
         val manifest = AndroidUtils.loadDomElement(facet.module, manifestFile,Manifest::class.java)
 //        val manifest = Manifest.getMainManifest(facet)
         val appPackage = manifest?.getPackage()?.value
         if (appPackage != null && appPackage.isNotEmpty()) {
             ApplicationManager.getApplication().invokeLater {
-                LocalFileSystem.getInstance().findFileByPath(AndroidRootUtil.getResourceDirPath(facet) ?: "")?.let {
+/*                LocalFileSystem.getInstance().findFileByPath(AndroidRootUtil.getResourceDirPath(facet) ?: "")?.let {
                     PsiManager.getInstance(project).findDirectory(it)?.let {
                         createLayoutFileForActivityOrFragment(ic,facet, element, appPackage, it, isJava,isActivity)
 
                     }
-                }
+                }*/
 
             }
         }
@@ -82,7 +83,7 @@ fun createLayoutFileForActivityOrFragment(ic: ItemConfigBean,facet: AndroidFacet
             val layoutFile = createFileResource(
                 layoutFileOriginName, resDirectory.findSubdirectory("layout")!!,
                 rootLayoutName,
-                ResourceFolderType.LAYOUT.getName(), false)
+                "ResourceFolderType.LAYOUT.getName()", false)
 
             //生成布局返回代码,暂时无法解决kotlin代码编辑的问题
 //            val layoutFileName = layoutFile?.name
@@ -118,14 +119,14 @@ fun createFileResource(@NotNull fileName: String?, @NotNull resSubdir: PsiDirect
     if (!valuesResourceFile) {
         properties.setProperty("ROOT_TAG", rootTagName)
     }
-    if (ResourceType.LAYOUT.getName().equals(resourceType)) {
-        val module: com.intellij.openapi.module.Module? = ModuleUtilCore.findModuleForPsiElement(resSubdir)
-        val platform: AndroidPlatform? = if (module != null) AndroidPlatform.getInstance(module) else null
-        apiLevel = platform?.apiLevel ?: -1
-        val value = if (apiLevel == -1 || apiLevel >= 8) "match_parent" else "fill_parent"
-        properties.setProperty("LAYOUT_WIDTH", value)
-        properties.setProperty("LAYOUT_HEIGHT", value)
-    }
+//    if ("ResourceFolderType.LAYOUT.getName()".equals(resourceType)) {
+//        val module: com.intellij.openapi.module.Module? = ModuleUtilCore.findModuleForPsiElement(resSubdir)
+//        val platform: AndroidPlatform? = if (module != null) AndroidPlatform.getInstance(module) else null
+//        apiLevel = platform?.apiLevel ?: -1
+//        val value = if (apiLevel == -1 || apiLevel >= 8) "match_parent" else "fill_parent"
+//        properties.setProperty("LAYOUT_WIDTH", value)
+//        properties.setProperty("LAYOUT_HEIGHT", value)
+//    }
     val createdElement: PsiElement = FileTemplateUtil.createFromTemplate(template, fileName, properties, resSubdir)
     if (createdElement is XmlFile) {
         return createdElement
